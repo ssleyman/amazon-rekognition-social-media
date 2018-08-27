@@ -1,17 +1,24 @@
-# Serverless Reference Architecture: Image Moderation Chatbot
+# Introduction to Amazon Rekognition with Social Media Image Moderator
 
-Administrators of large channels in popular chat apps can struggle to protect their users from trolls posting explicit or suggestive images. The Image Moderation Chatbot [Serverless](https://aws.amazon.com/serverless/#getstarted) reference architecture solves this problem by using [Amazon API Gateway](https://aws.amazon.com/api-gateway/), [AWS Lambda](https://aws.amazon.com/lambda/), and [Amazon Rekognition](https://aws.amazon.com/rekognition/)'s [image moderation](https://aws.amazon.com/rekognition/faqs/#image-moderation) deep learning feature to check images contained in messages posted to channels for explicit or suggestive content. Image moderation provides a hierarchical list of labels for each image with confidence scores to enable fine-grained control over what images to allow. Images found to contain explicit or suggestive content labels above a minimum confidence interval are automatically removed by the bot, and a message explaining the removal is posted by the bot to the originating channel.
+[Amazon Rekognition](https://aws.amazon.com/rekognition/), a deep learning-based service, makes it easy to add image and video analysis
+to your applications. Explore Rekognition features and build a Social Media Image Moderator in this walk-through. Begin by exploring Rekognition's face detection and comparison capabilities. Next, use the [Detect Unsafe Images API](https://docs.aws.amazon.com/rekognition/latest/dg/procedure-moderate-images.html) to detect and remove suggestive content as its being uploaded into social media by building an Image Moderator. This example is based on robperc's Serverless Reference Architecture: Image Moderation Chatbot repository here: https://github.com/aws-samples/lambda-refarch-image-moderation-chatbot
 
-This example is intended to work with [Slack](https://slack.com/), but could also be modified to work with other popular chat apps such as [Facebook Messenger](https://www.messenger.com/).
+Rekognition can identify images that contain suggestive or explicit content, helping administrators of photo sharing sites, forums, e-commerce platforms and more protect their users. Image moderation provides a hierarchical list of labels for each image with confidence scores to enable fine-grained control over what images to allow. In this example, images found to contain explicit or suggestive content labels above a minimum confidence interval are automatically removed by a Slack chatbot, and a message explaining the removal is posted to the originating channel.The reference architecture presented here uses [Amazon API Gateway](https://aws.amazon.com/api-gateway/), [AWS Lambda](https://aws.amazon.com/lambda/), and [Amazon Rekognition](https://aws.amazon.com/rekognition/)'s [image moderation](https://aws.amazon.com/rekognition/faqs/#image-moderation) to create a [Serverless](https://aws.amazon.com/serverless/#getstarted) workflow for protecting a user's social media channel. This example is intended to work with [Slack](https://slack.com/) using a chatbot, but could also be modified to work with other popular social media or chat apps such as [Facebook Messenger](https://www.messenger.com/).
 
 This repository contains sample code for all the Lambda functions depicted in the diagram below as well as an [AWS CloudFormation](https://aws.amazon.com/cloudformation/) template for creating the functions and related resources.
 
 To see some of the other powerful features of Amazon Rekognition in action check out the [Image Recognition and Processing Backend Serverless reference architecture](https://github.com/awslabs/lambda-refarch-imagerecognition)
 
+## Rekognition Introduction
+1. Sign in to your AWS account.
+1. Get familiar with the facial detection features of Rekognition by completing the following tutorial:
+https://aws.amazon.com/getting-started/tutorials/detect-analyze-compare-faces-rekognition/
+
+##Image Moderator
+Now build the Image Moderator. This example uses a Slack chatbot and AWS Lambda to call the Rekognition Detect Unsafe Images API. The architecture is explained below.
+
 ![screenshot for instruction](images/Architecture.png)
 
-
-## Walkthrough of the Architecture
 1. A user posts a message containing an image to a chat app channel that’s monitored by a chatbot.
 1. The chat app posts the event to an Amazon API Gateway API for the chatbot.
 1. The chatbot validates the event. This event triggers an AWS Lambda function that downloads the image.
@@ -45,7 +52,7 @@ This bot can be launched into any region that supports the underlying services f
 1. Input the appropriate application parameters under `Configure application parameters`
 1. Scroll to the bottom of the page and click `Deploy` to deploy the chatbot
 
-#### Option 2: Launch the CloudFormation Template Manually 
+#### Option 2: Launch the CloudFormation Template Manually
 If you would like to deploy the template manually, you need a S3 bucket in the target region, and then package the Lambda functions into that S3 bucket by using the `aws cloudformation package` utility.
 
 Set environment variables for later commands to use:
