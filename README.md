@@ -14,7 +14,7 @@ To see some of the other powerful features of Amazon Rekognition in action check
 1. Get familiar with the facial detection features of Rekognition by completing the following tutorial:
 https://aws.amazon.com/getting-started/tutorials/detect-analyze-compare-faces-rekognition/
 
-##Image Moderator
+## Image Moderator
 Now build the Image Moderator. This example uses a Slack chatbot and AWS Lambda to call the Rekognition Detect Unsafe Images API. The architecture is explained below.
 
 ![screenshot for instruction](images/Architecture.png)
