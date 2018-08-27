@@ -99,13 +99,11 @@ To test the example open your Slack bot and attempt to upload the sample images 
 
 ![testing of example gif](images/TestingExample.gif)
 
-Feel free to test the Image Moderator bot with additional Images.
-
 ## Exploring Results
 From the AWS Management Console services page, choose Lambda. Ensure you are in the correct Region using the dropdown menu in the upper right. Choose the function beginning with the name "ImageModerationChatbot-ImageModeratorFunction-". Here you can view the function that evaluates your Slack images. To check out the function output, choose 'Monitoring' then 'View logs in CloudWatch' and choose latest Log Stream.
 
 Return to the function page and scroll down to 'Environment Variables'. Note that the minimum confidence level for the Image Moderator has been defined as an Environment Variable with a default value of 80%. This can be edited in the SAM template (for tracking changes), or for testing purposes you can adjust it here. Highlight the value, change it, and Click 'Save' to Save the function. Now upload various images to see how confidence value affects their removal. For example, the following image of a runner is removed at 50% confidence, but not at the 80% default value.
-![runner](images/runner.jpg)
+- [Runner](https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=2c33a9425efd786461261c7a92d22634&auto=format&fit=crop&w=500&q=60)
 
 ## Cleaning Up the Stack Resources
 
