@@ -15,7 +15,9 @@ For further ideas applying Amazon Rekognition features to social media check out
 1. Sign in to your AWS account.
 1. Get familiar with the facial detection features of Rekognition by completing the following tutorial:
 https://aws.amazon.com/getting-started/tutorials/detect-analyze-compare-faces-rekognition/
-1. Note the additional demos provided in the Rekognition AWS Management Console. 
+1. While in the Rekognition page of the AWS Management Console, note the additional demos provided. Test out demos on 'Object and scene detection' and 'Text in image' now or at a later time.
+1. Choose the Image Moderation demo by clicking on 'Image Moderation' under 'Demos'
+1. Analyze the sample images. Note the Response for the swimwear image and the confidence level of over 90%.
 
 ## Image Moderator
 Now build the Image Moderator. This example uses a Slack chatbot and AWS Lambda to call the Rekognition Detect Unsafe Images API. The architecture is explained below.
@@ -96,6 +98,14 @@ To test the example open your Slack bot and attempt to upload the sample images 
 - [Yoga Swimwear](https://dhei5unw3vrsx.cloudfront.net/images/yoga_swimwear_resized.jpg) (will be removed by bot)
 
 ![testing of example gif](images/TestingExample.gif)
+
+Feel free to test the Image Moderator bot with additional Images.
+
+## Exploring Results
+From the AWS Management Console services page, choose Lambda. Ensure you are in the correct Region using the dropdown menu in the upper right. Choose the function beginning with the name "ImageModerationChatbot-ImageModeratorFunction-". Here you can view the function that evaluates your Slack images. To check out the function output, choose 'Monitoring' then 'View logs in CloudWatch' and choose latest Log Stream.
+
+Return to the function page and scroll down to 'Environment Variables'. Note that the minimum confidence level for the Image Moderator has been defined as an Environment Variable with a default value of 80%. This can be edited in the SAM template (for tracking changes), or for testing purposes you can adjust it here. Highlight the value, change it, and Click 'Save' to Save the function. Now upload various images to see how confidence value affects their removal. For example, the following image of a runner is removed at 50% confidence, but not at the 80% default value.
+![runner](images/runner.jpg)
 
 ## Cleaning Up the Stack Resources
 
