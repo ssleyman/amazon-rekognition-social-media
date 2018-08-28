@@ -44,12 +44,12 @@ First make sure you're logged in to Slack, then follow these instructions to pre
     * files:read
     * files:write:user
 1. Click `Save Changes`
-1. Click `Install App to Team` then `Authorize` then note the `OAuth Access Token` as it will be required later
+1. Click `Install App to Workspace` then `Authorize` then note the `OAuth Access Token` as it will be required later
 
 ### Launching the Bot Backend on AWS
 
-#### Option 1: Launch from Serverless Application Repository
-This bot can be launched into any region that supports the underlying services from the [Serverless Application Repository](https://aws.amazon.com/serverless/serverlessrepo/) using the instructions below:
+#### Launch from Serverless Application Repository
+The AWS services needed for bot have been defined in a Sererless Applictaion Model (SAM) template and can be launched from the AWS Serveless Application Repository. The Serverless Application Repository allows developers to share and deploy common serverless architectures. This bot can be launched into any region that supports the underlying services from the [Serverless Application Repository](https://aws.amazon.com/serverless/serverlessrepo/) using the instructions below:
 
 1. Navigate to the [application details page](https://serverlessrepo.aws.amazon.com/applications/arn:aws:serverlessrepo:us-east-1:426111819794:applications~image-moderation-chatbot) for the chatbot.
 1. Click `Deploy`
@@ -57,31 +57,6 @@ This bot can be launched into any region that supports the underlying services f
 1. Input the appropriate application parameters under `Configure application parameters`
 1. Scroll to the bottom of the page and click `Deploy` to deploy the chatbot
 
-#### Option 2: Launch the CloudFormation Template Manually
-If you would like to deploy the template manually, you need a S3 bucket in the target region, and then package the Lambda functions into that S3 bucket by using the `aws cloudformation package` utility.
-
-Set environment variables for later commands to use:
-
-```bash
-S3BUCKET=[REPLACE_WITH_YOUR_BUCKET]
-REGION=[REPLACE_WITH_YOUR_REGION]
-STACKNAME=[REPLACE_WITH_DESIRED_NAME]
-VTOKEN=[REPLACE_WITH_VERIFICATION_TOKEN]
-ATOKEN=[REPLACE_WITH_OAUTH_ACCESS_TOKEN]
-```
-
-Then go to the `cloudformation` folder and use the `aws cloudformation package` utility
-
-```bash
-cd cloudformation
-
-aws cloudformation package --region $REGION --s3-bucket $S3BUCKET --template image_moderator.serverless.yaml --output-template-file image_moderator.output.yaml
-```
-Last, deploy the stack with the resulting yaml (`image_moderator.output.yaml`) through the CloudFormation Console or command line:
-
-```bash
-aws cloudformation deploy --region $REGION --template-file image_moderator.output.yaml --stack-name $STACKNAME --capabilities CAPABILITY_NAMED_IAM --parameter-overrides VerificationToken=$VTOKEN AccessToken=$ATOKEN
-```
 
 ### Finalize Slack Event Subscription
 1. Navigate to the created stack in the CloudFormation console and note the value for the `RequestURL` output from the created stack as it will be required later
@@ -102,8 +77,8 @@ To test the example open your Slack bot and attempt to upload the sample images 
 ## Exploring Results
 From the AWS Management Console services page, choose Lambda. Ensure you are in the correct Region using the dropdown menu in the upper right. Choose the function beginning with the name "ImageModerationChatbot-ImageModeratorFunction-". Here you can view the function that evaluates your Slack images. To check out the function output, choose 'Monitoring' then 'View logs in CloudWatch' and choose latest Log Stream.
 
-Return to the function page and scroll down to 'Environment Variables'. Note that the minimum confidence level for the Image Moderator has been defined as an Environment Variable with a default value of 80%. This can be edited in the SAM template (for tracking changes), or for testing purposes you can adjust it here. Highlight the value, change it, and Click 'Save' to Save the function. Now upload various images to see how confidence value affects their removal. For example, the following image of a runner is removed at 50% confidence, but not at the 80% default value.
-- [Runner](https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=2c33a9425efd786461261c7a92d22634&auto=format&fit=crop&w=500&q=60)
+Return to the function page and scroll down to 'Environment Variables'. Note that the minimum confidence level for the Image Moderator has been defined as an Environment Variable with a default value of 80%. This can be edited in the SAM template (for tracking changes), or for testing purposes you can adjust it here. Highlight the value, change it, and Click 'Save' to Save the function. Now upload various images to see how confidence value affects their removal. For example, the following gym image is removed at 50% confidence, but not at the 80% default value.
+- [Runner](https://images.unsplash.com/photo-1518622358385-8ea7d0794bf6?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=42226a7bf3b99eec89267859b4f36114&auto=format&fit=crop&w=500&q=60)
 
 ## Cleaning Up the Stack Resources
 
