@@ -15,7 +15,7 @@ For further ideas applying Amazon Rekognition features to social media check out
 1. Sign in to your AWS account.
 1. Get familiar with the facial detection features of Rekognition by completing the following tutorial:
 https://aws.amazon.com/getting-started/tutorials/detect-analyze-compare-faces-rekognition/
-1. While in the Rekognition page of the AWS Management Console, note the additional demos provided. Test out demos on 'Object and scene detection' and 'Text in image' now or at a later time.
+1. While in the Rekognition page of the AWS Management Console, note the additional demos provided. Test out these demos, now, or at a later time.
 1. Choose the Image Moderation demo by clicking on 'Image Moderation' under 'Demos'
 1. Analyze the sample images. Note the Response for the swimwear image and the confidence level of over 90%.
 
@@ -35,35 +35,42 @@ Now build the Image Moderator. This example uses a Slack chatbot and AWS Lambda 
 ## Running the Example
 ### Preparing Slack
 First make sure you're logged in to Slack, then follow these instructions to prep your bot:
-1. [Create an app](https://api.slack.com/apps?new_app=1) ([Documentation](https://api.slack.com/slack-apps#creating_apps))
+1. [Create an app](https://api.slack.com/apps?new_app=1) ([Documentation](https://api.slack.com/slack-apps#creating_apps)). Add the App to a Workspace you will use for this lab. If you don't have Workspace, create one [here](https://slack.com/create).
+![screenshot for create app](images/createapp.png)
 1. From the `Basic Information` tab under `Settings` take note of the `Verification Token` as it will be required later
 1. Navigate to the `OAuth & Permissions` tab under `Features`
-1. Under the `Permissions Scopes` section add the following permission scopes
-    * channels:history
-    * chat:write:bot
-    * files:read
-    * files:write:user
+1. Under the `Scopes` section add the following permission scopes
+    * Under 'Conversations', 'Access users public channels; channels:history'
+    * Under 'Conversations', 'Send Images as [your app name]; chat:write:bot'
+    * Under 'Files', 'Access the workspace's files, comments, and associated information; files:read'
+    * Under 'Files', 'Upload and modify files as user; files:write:user'
+![screenshot for scopes](images/scopes.png)
 1. Click `Save Changes`
-1. Click `Install App to Workspace` then `Authorize` then note the `OAuth Access Token` as it will be required later
+1. Scroll to the top of the page and Click `Install App to Workspace` then `Authorize`. Read and acknowledge warning messages, if you are presented one.
+1. Note the `OAuth Access Token` as it will be required later
 
 ### Launching the Bot Backend on AWS
 
 #### Launch from Serverless Application Repository
-The AWS services needed for bot have been defined in a Sererless Applictaion Model (SAM) template and can be launched from the AWS Serveless Application Repository. The Serverless Application Repository allows developers to share and deploy common serverless architectures. This bot can be launched into any region that supports the underlying services from the [Serverless Application Repository](https://aws.amazon.com/serverless/serverlessrepo/) using the instructions below:
+The AWS services needed for bot have been defined in a Sererless Applictaion Model (SAM) template and can be launched from the [Serverless Application Repository](https://aws.amazon.com/serverless/serverlessrepo/). The Serverless Application Repository allows developers to share and deploy common serverless architectures, or stacks. Launch the bot using the instructions below. The us-west-2 (Oregon) Region is recommended for this lab.
 
 1. Navigate to the [application details page](https://serverlessrepo.aws.amazon.com/applications/arn:aws:serverlessrepo:us-east-1:426111819794:applications~image-moderation-chatbot) for the chatbot.
 1. Click `Deploy`
-1. From the region dropdown in the top right ensure you have the desired region to deploy into selected
-1. Input the appropriate application parameters under `Configure application parameters`
+1. From the Region dropdown in the upper right choose `Oregon`
+1. Input the Slack Access Token and Verification Token that you noted earlier into the application parameters under `Configure application parameters`
+![screenshot for params](images/configureparameters.png)
 1. Scroll to the bottom of the page and click `Deploy` to deploy the chatbot
+1. Within a few minutes, the stack build will complete
 
 
 ### Finalize Slack Event Subscription
-1. Navigate to the created stack in the CloudFormation console and note the value for the `RequestURL` output from the created stack as it will be required later
+1. Navigate to the CloudFormation page in the AWS Management console. Ensure you are in the Oregon Region, and find the newly created stack.
+1. Click on this stack and expand the `Outputs` section. Note the value for the `RequestURL` as it will be required later
 1. Return to the Slack app settings page for the Slack app created earlier
-1. Navigate to the `Event Subscriptions` tab under `Features` and enable events
-1. In the `Request URL` field enter the `RequestURL` value noted earlier
-1. Click `Add Workspace Event` and select `message.channels`
+1. Navigate to the `Event Subscriptions` tab under `Features` and toggle the switch to enable events
+1. In the `Request URL` field enter the `RequestURL` value noted earlier from CloudFormation
+1. Click `Add Workspace Event` and select `message.channels` `A message was posted to a channel`
+![screenshot for events](images/enableevents.png)
 1. Click `Save Changes`
 
 
@@ -75,10 +82,9 @@ To test the example open your Slack bot and attempt to upload the sample images 
 ![testing of example gif](images/TestingExample.gif)
 
 ## Exploring Results
-From the AWS Management Console services page, choose Lambda. Ensure you are in the correct Region using the dropdown menu in the upper right. Choose the function beginning with the name "ImageModerationChatbot-ImageModeratorFunction-". Here you can view the function that evaluates your Slack images. To check out the function output, choose 'Monitoring' then 'View logs in CloudWatch' and choose latest Log Stream.
-
-Return to the function page and scroll down to 'Environment Variables'. Note that the minimum confidence level for the Image Moderator has been defined as an Environment Variable with a default value of 80%. This can be edited in the SAM template (for tracking changes), or for testing purposes you can adjust it here. Highlight the value, change it, and Click 'Save' to Save the function. Now upload various images to see how confidence value affects their removal. For example, the following gym image is removed at 50% confidence, but not at the 80% default value.
-- [Runner](https://images.unsplash.com/photo-1518622358385-8ea7d0794bf6?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=42226a7bf3b99eec89267859b4f36114&auto=format&fit=crop&w=500&q=60)
+1. From the AWS Management Console services page, choose Lambda. Ensure you are in the correct Region using the dropdown menu in the upper right. Choose the function beginning with the name "ImageModerationChatbot-ImageModeratorFunction-". Here you can view the function that evaluates your Slack images.
+1. To check out the function output, choose 'Monitoring' then 'View logs in CloudWatch' and choose latest Log Stream.
+1. Return to the function page and scroll down to 'Environment Variables'. Note that the minimum confidence level for the Image Moderator has been defined as an Environment Variable with a default value of 80%. This can be edited in the SAM template (following best practices for change management), or for testing purposes you can adjust it here. Highlight the value, change it, and Click 'Save' to Save the function. Now upload various images to see how confidence value affects their removal.
 
 ## Cleaning Up the Stack Resources
 
