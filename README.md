@@ -37,7 +37,7 @@ Now build the Image Moderator. This example uses a Slack chatbot and AWS Lambda 
 First make sure you're logged in to Slack, then follow these instructions to prep your bot:
 1. [Create an app](https://api.slack.com/apps?new_app=1) ([Documentation](https://api.slack.com/slack-apps#creating_apps)). Add the App to a Workspace you will use for this lab. If you don't have Workspace, create one [here](https://slack.com/create).
 
-![screenshot for create app](images/createapp.png)
+  ![screenshot for create app](images/createapp.png)
 1. From the `Basic Information` tab under `Settings` take note of the `Verification Token` as it will be required later
 1. Navigate to the `OAuth & Permissions` tab under `Features`
 1. Under the `Scopes` section add the following permission scopes
@@ -46,7 +46,7 @@ First make sure you're logged in to Slack, then follow these instructions to pre
     * Under 'Files', 'Access the workspace's files, comments, and associated information; files:read'
     * Under 'Files', 'Upload and modify files as user; files:write:user'
 
-![screenshot for scopes](images/scopes.png)
+    ![screenshot for scopes](images/scopes.png)
 1. Click `Save Changes`
 1. Scroll to the top of the page and Click `Install App to Workspace` then `Authorize`. Read and acknowledge warning messages, if you are presented one.
 1. Note the `OAuth Access Token` as it will be required later
@@ -60,8 +60,7 @@ The AWS services needed for the bot have been defined in a Sererless Applictaion
 1. Click `Deploy`
 1. From the Region dropdown in the upper right choose `Oregon`
 1. Input the Slack Access Token and Verification Token that you noted earlier into the application parameters under `Configure application parameters`
-
-![screenshot for params](images/configureparameters.png)
+  ![screenshot for params](images/configureparameters.png)
 1. Scroll to the bottom of the page and click `Deploy` to deploy the chatbot
 1. Within a few minutes, the stack build will complete
 
@@ -73,9 +72,8 @@ The AWS services needed for the bot have been defined in a Sererless Applictaion
 1. Navigate to the `Event Subscriptions` tab under `Features` and toggle the switch to enable events
 1. In the `Request URL` field enter the `RequestURL` value noted earlier from CloudFormation
 1. Click `Add Workspace Event` and select `message.channels` `A message was posted to a channel`
-
-![screenshot for events](images/enableevents.png)
-  Click `Save Changes`
+  ![screenshot for events](images/enableevents.png)
+1. Click `Save Changes`
 
 
 ## Testing the Example
