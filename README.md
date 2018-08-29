@@ -59,7 +59,7 @@ First make sure you're logged in to Slack, then follow these instructions to pre
 ### Launching the Bot Backend on AWS
 
 #### Launch from Serverless Application Repository
-The AWS services needed for the bot have been defined in a Sererless Applictaion Model (SAM) template and can be launched from the [Serverless Application Repository](https://aws.amazon.com/serverless/serverlessrepo/). The Serverless Application Repository allows developers to share and deploy common serverless architectures, or stacks. Launch the bot using the instructions below. The us-west-2 (Oregon) Region is recommended for this lab.
+The AWS services needed for the bot have been defined in a Serverless Applictaion Model (SAM) template and can be launched from the [Serverless Application Repository](https://aws.amazon.com/serverless/serverlessrepo/). The Serverless Application Repository allows developers to share and deploy common serverless architectures, or stacks. Launch the bot using the instructions below. The us-west-2 (Oregon) Region is recommended for this lab.
 
 1. Navigate to the [application details page](https://serverlessrepo.aws.amazon.com/applications/arn:aws:serverlessrepo:us-east-1:426111819794:applications~image-moderation-chatbot) for the chatbot.
 1. Click `Deploy`
