@@ -36,7 +36,6 @@ Now build the Image Moderator. This example uses a Slack chatbot and AWS Lambda 
 ### Preparing Slack
 First make sure you're logged in to Slack, then follow these instructions to prep your bot:
 1. [Create an app](https://api.slack.com/apps?new_app=1) ([Documentation](https://api.slack.com/slack-apps#creating_apps)). Add the App to a Workspace you will use for this lab. If you don't have Workspace, create one [here](https://slack.com/create).
-
   ![screenshot for create app](images/createapp.png)
 1. From the `Basic Information` tab under `Settings` take note of the `Verification Token` as it will be required later
 1. Navigate to the `OAuth & Permissions` tab under `Features`
