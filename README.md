@@ -15,7 +15,14 @@ For further ideas applying Amazon Rekognition features to social media check out
 1. Sign in to your AWS account.
 1. Get familiar with the facial detection features of Rekognition by completing the following tutorial:
 https://aws.amazon.com/getting-started/tutorials/detect-analyze-compare-faces-rekognition/
-1. While in the Rekognition page of the AWS Management Console, note the additional demos provided. Test out these demos, now, or at a later time.
+1. While in the Rekognition page of the AWS Management Console, note the additional demos provided. Test out these demos, now, or at a later time. Use your own images, or try images from the links below:
+  [Villa](hhttps://s3-us-west-2.amazonaws.com/wibd/wibdrekognition/villa.jpg)
+  [Cliffs](https://s3-us-west-2.amazonaws.com/wibd/wibdrekognition/cliffs.jpg)
+  [Tower selfie](https://s3-us-west-2.amazonaws.com/wibd/wibdrekognition/towerselfie.jpg)
+  [Building selfie](https://s3-us-west-2.amazonaws.com/wibd/wibdrekognition/buildingselfie.jpg)
+  [Dog](https://s3-us-west-2.amazonaws.com/wibd/wibdrekognition/dog2.jpg)
+  [Start Sign](https://s3-us-west-2.amazonaws.com/wibd/wibdrekognition/startsign.jpg)
+
 1. Choose the Image Moderation demo by clicking on 'Image Moderation' under 'Demos'
 1. Analyze the sample images. Note the JSON Response for the swimwear image and the confidence level of over 90%.
 
