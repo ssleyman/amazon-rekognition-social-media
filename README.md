@@ -17,7 +17,7 @@ For further ideas applying Amazon Rekognition features to social media check out
 https://aws.amazon.com/getting-started/tutorials/detect-analyze-compare-faces-rekognition/
 1. While in the Rekognition page of the AWS Management Console, note the additional demos provided. Test out these demos, now, or at a later time.
 1. Choose the Image Moderation demo by clicking on 'Image Moderation' under 'Demos'
-1. Analyze the sample images. Note the Response for the swimwear image and the confidence level of over 90%.
+1. Analyze the sample images. Note the JSON Response for the swimwear image and the confidence level of over 90%.
 
 ## Image Moderator
 Now build the Image Moderator. This example uses a Slack chatbot and AWS Lambda to call the Rekognition Detect Unsafe Images API. The architecture is explained below.
@@ -42,7 +42,7 @@ First make sure you're logged in to Slack, then follow these instructions to pre
 1. Navigate to the `OAuth & Permissions` tab under `Features`
 1. Under the `Scopes` section add the following permission scopes
     * Under 'Conversations', 'Access users public channels; channels:history'
-    * Under 'Conversations', 'Send Images as [your app name]; chat:write:bot'
+    * Under 'Conversations', 'Send Messages as [your app name]; chat:write:bot'
     * Under 'Files', 'Access the workspace's files, comments, and associated information; files:read'
     * Under 'Files', 'Upload and modify files as user; files:write:user'
 
@@ -54,7 +54,7 @@ First make sure you're logged in to Slack, then follow these instructions to pre
 ### Launching the Bot Backend on AWS
 
 #### Launch from Serverless Application Repository
-The AWS services needed for bot have been defined in a Sererless Applictaion Model (SAM) template and can be launched from the [Serverless Application Repository](https://aws.amazon.com/serverless/serverlessrepo/). The Serverless Application Repository allows developers to share and deploy common serverless architectures, or stacks. Launch the bot using the instructions below. The us-west-2 (Oregon) Region is recommended for this lab.
+The AWS services needed for the bot have been defined in a Sererless Applictaion Model (SAM) template and can be launched from the [Serverless Application Repository](https://aws.amazon.com/serverless/serverlessrepo/). The Serverless Application Repository allows developers to share and deploy common serverless architectures, or stacks. Launch the bot using the instructions below. The us-west-2 (Oregon) Region is recommended for this lab.
 
 1. Navigate to the [application details page](https://serverlessrepo.aws.amazon.com/applications/arn:aws:serverlessrepo:us-east-1:426111819794:applications~image-moderation-chatbot) for the chatbot.
 1. Click `Deploy`
@@ -75,11 +75,11 @@ The AWS services needed for bot have been defined in a Sererless Applictaion Mod
 1. Click `Add Workspace Event` and select `message.channels` `A message was posted to a channel`
 
 ![screenshot for events](images/enableevents.png)
-1. Click `Save Changes`
+  Click `Save Changes`
 
 
 ## Testing the Example
-To test the example open your Slack bot and attempt to upload the sample images from the Amazon Rekognition console demo, which can be downloaded from the links below:
+To test the example, open your Slack workspace (available at [yourworkspaceurl].slack.com) and choose a channel for posting messages. Attempt to upload the sample images from the Amazon Rekognition console demo, which can be downloaded from the links below:
 - [Family Picnic](https://dhei5unw3vrsx.cloudfront.net/images/family_picnic_resized.jpg) (will not be removed by bot)
 - [Yoga Swimwear](https://dhei5unw3vrsx.cloudfront.net/images/yoga_swimwear_resized.jpg) (will be removed by bot)
 
@@ -88,7 +88,7 @@ To test the example open your Slack bot and attempt to upload the sample images 
 ## Exploring Results
 1. Navigate to the Lambda page in the AWS Management console. Ensure you are in the Oregon Region. Choose the function created by the stack which will likely include 'ImageModeratorFunction' in the name. Here you can view the function that evaluates your Slack images.
 1. To check out the function output, choose 'Monitoring' then 'View logs in CloudWatch' and choose latest Log Stream.
-1. Return to the function page and scroll down to 'Environment Variables'. Note that the minimum confidence level for the Image Moderator has been defined as an Environment Variable with a default value of 80%. This can be edited in the SAM template (following best practices for change management), or for testing purposes you can adjust it here. Highlight the value, change it, and Click 'Save' to Save the function. Now upload various images to see how confidence value affects their removal.
+1. Return to the function page and scroll down to 'Environment Variables'. Note that the minimum confidence level for the Image Moderator has been defined as an Environment Variable with a default value of 80%. This can be edited in the SAM template (following best practices for change management), or for testing purposes you can adjust it here. Highlight the value, change it, and Click 'Save' to Save the function. Now upload various images to see how confidence level affects their removal.
 
 ![screenshot for variables](images/environmentvariables.png)
 
