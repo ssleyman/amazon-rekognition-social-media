@@ -19,8 +19,9 @@ https://aws.amazon.com/getting-started/tutorials/detect-analyze-compare-faces-re
 1. Choose the Image Moderation demo by clicking on 'Image Moderation' under 'Demos'
 1. Analyze the sample images. Note the JSON Response for the swimwear image and the confidence level of over 90%.
 
-* [Villa](hhttps://s3-us-west-2.amazonaws.com/wibd/wibdrekognition/villa.jpg)
+* samples
 * [Cliffs](https://s3-us-west-2.amazonaws.com/wibd/wibdrekognition/cliffs.jpg)
+* [Villa](https://s3-us-west-2.amazonaws.com/wibd/wibdrekognition/villa.jpg)
 * [Tower selfie](https://s3-us-west-2.amazonaws.com/wibd/wibdrekognition/towerselfie.jpg)
 * [Building selfie](https://s3-us-west-2.amazonaws.com/wibd/wibdrekognition/buildingselfie.jpg)
 * [Dog](https://s3-us-west-2.amazonaws.com/wibd/wibdrekognition/dog2.jpg)
