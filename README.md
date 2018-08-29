@@ -16,6 +16,7 @@ For further ideas applying Amazon Rekognition features to social media check out
 1. Get familiar with the facial detection features of Rekognition by completing the following tutorial:
 https://aws.amazon.com/getting-started/tutorials/detect-analyze-compare-faces-rekognition/
 1. While in the Rekognition page of the AWS Management Console, note the additional demos provided. Test out these demos, now, or at a later time. Use your own images, or try images from the links below:
+
   * [Villa](hhttps://s3-us-west-2.amazonaws.com/wibd/wibdrekognition/villa.jpg)
   * [Cliffs](https://s3-us-west-2.amazonaws.com/wibd/wibdrekognition/cliffs.jpg)
   * [Tower selfie](https://s3-us-west-2.amazonaws.com/wibd/wibdrekognition/towerselfie.jpg)
