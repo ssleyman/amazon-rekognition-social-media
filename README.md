@@ -21,8 +21,6 @@ https://aws.amazon.com/getting-started/tutorials/detect-analyze-compare-faces-re
 
 * [Cliffs](https://s3-us-west-2.amazonaws.com/wibd/wibdrekognition/cliffs.jpg)
 * [Villa](https://s3-us-west-2.amazonaws.com/wibd/wibdrekognition/villa.jpg)
-* [Tower selfie](https://s3-us-west-2.amazonaws.com/wibd/wibdrekognition/towerselfie.jpg)
-* [Building selfie](https://s3-us-west-2.amazonaws.com/wibd/wibdrekognition/buildingselfie.jpg)
 * [Dog](https://s3-us-west-2.amazonaws.com/wibd/wibdrekognition/dog2.jpg)
 * [Start Sign](https://s3-us-west-2.amazonaws.com/wibd/wibdrekognition/startsign.jpg)
 
